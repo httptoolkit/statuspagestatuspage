@@ -15,10 +15,13 @@ async function checkDetectedStatus(service: Service) {
   });
 
   const overallStatus = await statusResponse.text();
+
   if (overallStatus === 'success') {
-    return { error: false };
+    return { status: 'ok' };
+  } else if (overallStatus === 'warning') {
+    return { status: 'warning', message: `Status is ${overallStatus}` }
   } else {
-    return { error: true, message: `Status is ${overallStatus}` }
+    return { status: 'error', message: `Status is ${overallStatus}` }
   }
 }
 
@@ -43,18 +46,26 @@ async function checkOfficialStatus(service: Service) {
   const statusPageContent = await statusResponse.text();
   const pageDom = parsePage(statusPageContent);
 
-
   const matchingErrorSelectors = service.statusPage.errorSelectors.filter((errorSelector) => {
+    return !!CSSselect.selectOne(errorSelector, pageDom);
+  });
+
+  const matchingWarningSelectors = service.statusPage.warningSelectors.filter((errorSelector) => {
     return !!CSSselect.selectOne(errorSelector, pageDom);
   });
 
   if (matchingErrorSelectors.length > 0) {
     return {
-      error: true,
+      status: 'error',
       message: `Matched selectors: ${matchingErrorSelectors.join(', ')}`
     };
+  } else if (matchingWarningSelectors.length > 0) {
+    return {
+      status: 'warning',
+      message: `Matched selectors: ${matchingWarningSelectors.join(', ')}`
+    };
   } else {
-    return { error: false };
+    return { status: 'ok' };
   }
 }
 
@@ -66,7 +77,12 @@ async function checkServiceStatus(serviceId: ServiceKey) {
     checkDetectedStatus(service)
   ]);
 
-  await STATUS_KV.put(serviceId, JSON.stringify({ official, detected, lastUpdate: Date.now() }));
+  await STATUS_KV.put(serviceId, JSON.stringify({
+    statusPage: service.statusPage.url,
+    official,
+    detected,
+    lastUpdate: Date.now()
+  }));
 
   console.log(`Updated status for ${serviceId}:`, { official, detected });
 }
