@@ -44,14 +44,14 @@ async function checkOfficialStatus(service: Service) {
   if (!statusResponse.ok) throw new Error(`Request to ${service.statusPage.url} failed with ${statusResponse.status}`);
 
   const statusPageContent = await statusResponse.text();
-  const pageDom = parsePage(statusPageContent);
+  const pageDom = await parsePage(statusPageContent);
 
-  const matchingErrorSelectors = service.statusPage.errorSelectors.filter((errorSelector) => {
-    return !!CSSselect.selectOne(errorSelector, pageDom);
+  const matchingErrorSelectors = service.statusPage.errorSelectors.filter((selector) => {
+    return !!CSSselect.selectOne(selector, pageDom);
   });
 
-  const matchingWarningSelectors = service.statusPage.warningSelectors.filter((errorSelector) => {
-    return !!CSSselect.selectOne(errorSelector, pageDom);
+  const matchingWarningSelectors = service.statusPage.warningSelectors.filter((selector) => {
+    return !!CSSselect.selectOne(selector, pageDom);
   });
 
   if (matchingErrorSelectors.length > 0) {

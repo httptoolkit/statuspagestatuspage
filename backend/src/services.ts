@@ -18,11 +18,11 @@ export const SERVICES = {
     statusPage: {
       url: "https://www.githubstatus.com/",
       errorSelectors: [
-        ".components-container .fa-exclamation-triangle", // Partial outage
         ".components-container .fa-times" // Major outage
       ],
       warningSelectors: [
         ".unresolved-incidents .incident-title", // Ongoing incident
+        ".components-container .fa-exclamation-triangle", // Minor outage
         ".components-container .fa-minus-square", // Degraded performance
       ]
     }
@@ -32,12 +32,12 @@ export const SERVICES = {
     statusPage: {
       url: "https://status.slack.com/",
       errorSelectors: [
-        "#services [src*=TableOutage]",
-        "#services [src*=TableIncident]"
+        "#services [src*=TableOutage]"
       ],
       warningSelectors: [
         "#services [src*=TableMaintenance]",
         "#services [src*=TableNotice]",
+        "#services [src*=TableIncident]"
       ]
     }
   }
