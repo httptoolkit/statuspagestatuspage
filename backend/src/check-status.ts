@@ -66,12 +66,14 @@ async function checkServiceStatus(serviceId: ServiceKey) {
     checkDetectedStatus(service)
   ]);
 
-  await STATUS_KV.put(serviceId, JSON.stringify({ official, detected }));
+  await STATUS_KV.put(serviceId, JSON.stringify({ official, detected, lastUpdate: Date.now() }));
 
   console.log(`Updated status for ${serviceId}:`, { official, detected });
 }
 
 export async function checkServiceStatuses() {
+  console.log("Updating statuses...");
   const serviceIds = Object.keys(SERVICES) as Array<ServiceKey>;
   await Promise.all(serviceIds.map((serviceId) => checkServiceStatus(serviceId)));
+  console.log("Statuses updated");
 }
