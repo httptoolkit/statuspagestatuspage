@@ -17,8 +17,10 @@ export async function getServiceStatus(): Promise<Response> {
   return new Response(JSON.stringify(serviceStatusIndex), {
     status: 200,
     headers: {
-      'content-type': 'application/json',
-      'cache-control': 'public, max-age=60, stale-while-revalidate=60'
+      'Content-Type': 'application/json',
+      'Cache-Control': 'public, max-age=60, stale-while-revalidate=60',
+      'Access-Control-Allow-Origin': '*',
+      'Vary': 'Origin'
     }
   });
 }
