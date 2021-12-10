@@ -1,7 +1,7 @@
-name = "backend"
+name = "statuspagestatuspage"
 type = "javascript"
 zone_id = ""
-account_id = ""
+account_id = "49045c1d2a1b69c8b56063c60237a1a4"
 route = ""
 workers_dev = true
 compatibility_date = "2021-12-08"
