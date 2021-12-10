@@ -14,7 +14,7 @@ async function checkDetectedStatus(service: Service) {
     }
   });
 
-  const overallStatus = await statusResponse.text();
+  const overallStatus = await statusResponse.json();
 
   if (overallStatus === 'success') {
     return { status: 'ok' };

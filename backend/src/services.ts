@@ -12,7 +12,36 @@ export const SERVICES = {
         "#current_events_block img[src*='status2.gif']" // Degradation
       ]
     }
-} as const;
+  },
+  'github': {
+    detectorId: '10004',
+    statusPage: {
+      url: "https://www.githubstatus.com/",
+      errorSelectors: [
+        ".components-container .fa-exclamation-triangle", // Partial outage
+        ".components-container .fa-times" // Major outage
+      ],
+      warningSelectors: [
+        ".unresolved-incidents .incident-title", // Ongoing incident
+        ".components-container .fa-minus-square", // Degraded performance
+      ]
+    }
+  },
+  'slack': {
+    detectorId: '35437',
+    statusPage: {
+      url: "https://status.slack.com/",
+      errorSelectors: [
+        "#services [src*=TableOutage]",
+        "#services [src*=TableIncident]"
+      ],
+      warningSelectors: [
+        "#services [src*=TableMaintenance]",
+        "#services [src*=TableNotice]",
+      ]
+    }
+  }
+};
 
 export type ServiceKey = keyof typeof SERVICES;
 export type Service = typeof SERVICES[ServiceKey];
