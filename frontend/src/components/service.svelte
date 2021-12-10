@@ -10,7 +10,7 @@
         || status.official.status !== 'ok';
 </script>
 
-<tr class="service-row">
+<tr>
     <td class:bad={!statusCorrect}>
         <FontAwesomeIcon
             icon={icon}
@@ -31,6 +31,7 @@
     td {
         width: 30%;
         text-align: center;
+        min-height: 150px;
     }
 
     .bad {

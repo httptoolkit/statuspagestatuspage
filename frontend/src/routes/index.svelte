@@ -8,10 +8,17 @@
         faGithub,
         faSlack
     } from '@fortawesome/free-brands-svg-icons';
-    import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+    import {
+        faCheck,
+        faTimes,
+        faExclamationCircle,
+        faExclamationTriangle
+    } from '@fortawesome/free-solid-svg-icons';
 
     library.add(faCheck);
     library.add(faTimes);
+    library.add(faExclamationCircle);
+    library.add(faExclamationTriangle);
 
     library.add(faAws);
     library.add(faGithub);

@@ -6,17 +6,26 @@
 </script>
 
 <td class={"statusCell " + status}>
-    {#if status !== 'ok'}
-        <FontAwesomeIcon class="statusIcon" icon={['fas', 'times']} title="Error" size='4x'/>
+    {#if status === 'error'}
+        <FontAwesomeIcon class="statusIcon" icon={['fas', 'exclamation-circle']} title="Error" size='4x'/>
         <p>
             {#if type === 'official'}
-                Status page reports {status === 'warning' ? 'minor' : 'major'} issues
+                Status page reports major issues
             {:else}
-                Users report {status === 'warning' ? 'minor' : 'major'} issues
+                Many users reporting issues
+            {/if}
+        </p>
+    {:else if status === 'warning'}
+        <FontAwesomeIcon class="statusIcon" icon={['fas', 'exclamation-triangle']} title="Warning" size='3x'/>
+        <p>
+            {#if type === 'official'}
+                Status page reports minor issues
+            {:else}
+                Users report minor issues
             {/if}
         </p>
     {:else}
-        <FontAwesomeIcon class="statusIcon" icon={['fas', 'check']} title="All good" size='4x' />
+        <FontAwesomeIcon class="statusIcon" icon={['fas', 'check']} title="All good" size='2x' />
         <p>
             {#if type === 'official'}
                 Status page reports all OK
@@ -29,8 +38,10 @@
 
 <style>
     .statusCell {
+        height: 150px;
+
         margin: 0 auto;
-        padding: 15px 10px 15px 10px;
+        padding: 15px 30px 15px 30px;
 
         border-radius: 6px;
         border: 3px solid;
