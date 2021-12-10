@@ -1,5 +1,10 @@
-import { handleRequest } from './handler'
+import { checkServiceStatuses } from './check-status';
+import { getServiceStatus as getServiceStatuses } from './get-statuses';
 
-addEventListener('fetch', (event) => {
-  event.respondWith(handleRequest(event.request))
-})
+addEventListener('scheduled', () => {
+  checkServiceStatuses();
+});
+
+addEventListener('fetch', (event: any) => {
+  event.respondWith(getServiceStatuses());
+});

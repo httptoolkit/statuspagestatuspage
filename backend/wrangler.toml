@@ -6,6 +6,13 @@ route = ""
 workers_dev = true
 compatibility_date = "2021-12-08"
 
+kv_namespaces = [
+    { binding = "STATUS_KV", id = "9900fd876b4b4cc1afc90e68b0ff9382", preview_id = "9900fd876b4b4cc1afc90e68b0ff9382" }
+]
+
+[triggers]
+crons = ["* * * * *"]
+
 [build]
 command = "npm install && npm run build"
 [build.upload]
