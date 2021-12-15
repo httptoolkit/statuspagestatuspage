@@ -24,7 +24,7 @@
     library.add(faGithub);
     library.add(faSlack);
 
-    const statusPromise = fetch("https://statuspagestatuspage.spsp.workers.dev")
+    const statusPromise = fetch("https://statuspagestatuspage.htk.workers.dev")
         .then((response) => {
             if (!response.ok) throw new Error(`Unexpected ${response.status} response for status data`);
             return response.json();
