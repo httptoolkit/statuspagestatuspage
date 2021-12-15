@@ -38,21 +38,24 @@
         <p>Loading status data...</p>
     {:then status}
         <table>
-            <Service
-                icon={faAws}
-                serviceName="Amazon Web Services"
-                status={status.aws}
-            />
-            <Service
-                icon={faGithub}
-                serviceName="GitHub"
-                status={status.github}
-            />
-            <Service
-                icon={faSlack}
-                serviceName="Slack"
-                status={status.slack}
-            />
+            <thead><th></th><th>Official Status</th><th>Reported Status</th></thead>
+            <tbody>
+                <Service
+                    icon={faAws}
+                    serviceName="Amazon Web Services"
+                    status={status.aws}
+                />
+                <Service
+                    icon={faGithub}
+                    serviceName="GitHub"
+                    status={status.github}
+                />
+                <Service
+                    icon={faSlack}
+                    serviceName="Slack"
+                    status={status.slack}
+                />
+            </tbody>
         </table>
     {:catch error}
         <p>Failed to load status data: {error}</p>
