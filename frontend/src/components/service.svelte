@@ -17,6 +17,7 @@
             size='6x'
             title={serviceName}
         />
+        <h3>{serviceName}</h3>
         {#if !statusCorrect}
             <p>
                 Status page accuracy degraded
@@ -36,5 +37,13 @@
 
     .bad {
         color: #cf000f;
+    }
+
+    h3 {
+        margin-bottom: 0;
+    }
+
+    p {
+        margin-top: 5px;
     }
 </style>
