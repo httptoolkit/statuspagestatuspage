@@ -60,6 +60,9 @@
     {:catch error}
         <p>Failed to load status data: {error}</p>
     {/await}
+    <footer>
+        An <a href="https://httptoolkit.tech/">HTTP Toolkit</a> project
+    </footer>
 </main>
 
 <style>
@@ -74,5 +77,10 @@
         width: 100%;
         border-spacing: 6px;
         margin-top: 50px;
+    }
+
+    footer {
+        margin: 50px auto 20px;
+        text-align: center;
     }
 </style>
